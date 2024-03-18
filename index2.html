@@ -12,7 +12,7 @@
 <body class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="home.html"><img src="logo_navbar_white.png" width="80"></a>
+          <a class="navbar-brand" href="index.html"><img src="logo_navbar_white.png" width="80"></a>
         </div>
       </nav>
       <div class="counter2">
@@ -23,16 +23,24 @@
       <form id="MainForm">
         <div class="card" style="margin-top: 5px; margin-bottom: 10px;">
           <div class="card-body" style="text-align: center;">
-            <h5 class="card-title">Login Surveyor</h5>
+            <h5 class="card-title">Register Surveyor</h5>
             <div class="form-floating mb-3">
               <input type="email" class="form-control" id="emailInp" placeholder="name@example.com" id="emailInp">
               <label for="floatingInput">Email address</label>
             </div>
-            <div class="form-floating">
+            <div class="form-floating mb-3">
               <input type="password" class="form-control" id="passwordInp" placeholder="Password" id="passwordInp">
               <label for="floatingPassword">Password</label>
             </div>
-            <button type="submit" class="btn btn-dark" style="margin-top: 15px;">Login</button>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="fnameInp" placeholder="name@example.com" id="fnameInp">
+              <label for="floatingInput">First Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="lnameInp" placeholder="name@example.com" id="lnameInp">
+              <label for="floatingInput">Last Name</label>
+            </div>
+            <button type="submit" class="btn btn-dark" style="margin-top: 15px;">Daftar</button>
           </div>
         </div>
       </form>
@@ -57,11 +65,16 @@
           </div>
 </body>
 <script type="module">
+  // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
-  import { getFirestore, doc, getDoc} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
   apiKey: "AIzaSyAbJMzhsxCwiwXrTDq07s8Yo0tcKP1O798",
   authDomain: "database1-e20d1.firebaseapp.com",
@@ -72,31 +85,26 @@
 };
 
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
   const db = getFirestore();
   const auth = getAuth(app);
 
   let EmailInp = document.getElementById('emailInp');
-  let PassInp = document.getElementById('passwordInp'); 
+  let PassInp = document.getElementById('passwordInp');  
+  let FnameInp = document.getElementById('fnameInp');
+  let LnameInp = document.getElementById('lnameInp');
   let MainForm = document.getElementById('MainForm');
 
-  let SignInUser = evt => {
+  let RegisterUser = evt => {
     evt.preventDefault();
 
-    signInWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
-    .then(async(credentials)=>{
+    createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
+    .then(async (credentials)=>{
       var ref = doc(db, "UserAuthList", credentials.user.uid);
-      const docSnap = await getDoc(ref);
-
-      if(docSnap.exists()){
-        sessionStorage.setItem("user-info", JSON.stringify({
-          firstname: docSnap.data().firstname,
-          lastname: docSnap.data().lastname,
-        }))
-        sessionStorage.setItem("user-creds", JSON.stringify(credentials.user));
-        window.location.href = "home.html";
-      }
-      })
+      await setDoc(ref, {
+        firstname: FnameInp.value,
+        lastname: LnameInp.value
+      });
+    })
     .catch((error)=>{
       alert(error.message);
       console.log(error.code);
@@ -104,6 +112,6 @@
     })
   }
 
-  MainForm.addEventListener('submit', SignInUser);
+  MainForm.addEventListener('submit', RegisterUser)
 </script>
 </html>

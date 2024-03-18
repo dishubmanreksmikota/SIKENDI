@@ -13,7 +13,7 @@
       <form method="POST" name="contact-form" class="container">
         <nav class="navbar" style="background-color: #ffffff;">
           <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html"><img src="../logo_navbar_black.png" width="80"></a>
+            <a class="navbar-brand" href="../home.html"><img src="../logo_navbar_black.png" width="80"></a>
             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border-radius: 100px;">
               i
             </button>
@@ -194,4 +194,23 @@
       </nav>
     </form>
 </body>
+<script>
+  let UserCreds = JSON.parse(sessionStorage.getItem("user-creds"));
+  let UserInfo = JSON.parse(sessionStorage.getItem("user-info"));
+  let SignoutBtn = document.getElementById('signoutbutton');
+  
+  let Signout = ()=>{
+    sessionStorage.removeItem("user-creds");
+    sessionStorage.removeItem("user-info");
+    window.location.href = "../home.html"
+  }
+
+  let CheckCreds =  ()=>{
+    if (!sessionStorage.getItem("user-creds"))
+    window.location.href = "../home.html"
+  }
+
+  window.addEventListener('load', CheckCreds);
+  SignoutBtn.addEventListener('click', Signout);
+</script>
 </html>
