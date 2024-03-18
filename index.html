@@ -12,7 +12,8 @@
 <body class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="home.html"><img src="logo_navbar_white.png" width="80"></a>
+          <a class="navbar-brand" href="index.html"><img src="logo_navbar_white.png" width="80"></a>
+          <button type="button" class="btn btn-danger btn-sm" id="signoutbutton">Keluar</button>
         </div>
       </nav>
       <div class="counter2">
@@ -20,23 +21,49 @@
               <img src="logo_slogan.png" width="300">
             </div>
       </div>
-      <form id="MainForm">
-        <div class="card" style="margin-top: 5px; margin-bottom: 10px;">
-          <div class="card-body" style="text-align: center;">
-            <h5 class="card-title">Login Surveyor</h5>
-            <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="emailInp" placeholder="name@example.com" id="emailInp">
-              <label for="floatingInput">Email address</label>
-            </div>
-            <div class="form-floating">
-              <input type="password" class="form-control" id="passwordInp" placeholder="Password" id="passwordInp">
-              <label for="floatingPassword">Password</label>
-            </div>
-            <button type="submit" class="btn btn-dark" style="margin-top: 15px;">Login</button>
-          </div>
+      <div class="card" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="card-body" style="text-align: center;">
+          <h6 id="msg"></h2>
         </div>
-      </form>
-          <div class="card" style="margin-top: 5px; margin-bottom: 10px;">
+      </div>
+              <div class="card" style="margin-top: 10px; margin-bottom: 10px;">
+                <div class="card-body" style="text-align: center;">
+                  <h5 class="card-title">Survei CTMC</h5>
+                  <p class="card-text">Survei CTMC atau <cite>Classified Turning Movement Counting</cite> yaitu menghitung kendaraan membelok yang dilakukan pada jam sibuk bertujuan untuk mencari aktivitas kinerja simpang.</p>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      Survei
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="ctmc/ctmcform1.html">Simpang Tugu Adipura</a></li>
+                      <li><a class="dropdown-item" href="ctmc/ctmcform2.html">Simpang Dago Bawah</a></li>
+                      <li><a class="dropdown-item" href="ctmc/ctmcform3.html">Simpang Syamsur</a></li>
+                      <li><a class="dropdown-item" href="ctmc/ctmcform4.html">Simpang Syamsil</a></li>
+                      <li><a class="dropdown-item" href="ctmc/ctmcform5.html">Simpang Veteran I</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body" style="text-align: center;">
+                  <h5 class="card-title">Survei TC</h5>
+                  <p class="card-text">Survei TC <cite>Traffic Counting</cite> yaitu menghitung jumlah kendaraan yang melintas pada ruas jalan untuk mendapatkan volume lalu lintas pada ruas jalan tersebut.</p>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      Survei
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Jalan Raya Baros</a></li>
+                      <li><a class="dropdown-item" href="#">Jalan K.H Sanusi</a></li>
+                      <li><a class="dropdown-item" href="#">Jalan R.A Kosasih</a></li>
+                      <li><a class="dropdown-item" href="#">Jalan Pelabuhan II</a></li>
+                      <li><a class="dropdown-item" href="#">Jalan Letkol Eddie Soekardi (Jalur)</a></li>
+                      <li><a class="dropdown-item" href="#">Jalan Baru Sukaraja</a></li>
+                    </ul>
+                  </div>                  
+                </div>
+              </div>
+          <div class="card" style="margin-top: 10px; margin-bottom: 10px;">
             <div class="card-body" style="text-align: center;">
               <h5 class="card-title">Pantau Arus Lalu Lintas Mudik</h5>
               <p class="card-text">Silakan klik disini untuk mengakses informasi terbaru tentang arus lalu lintas mudik di Kota Sukabumi pada Hari Ini.</p>
@@ -56,54 +83,30 @@
           </nav>
           </div>
 </body>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
-  import { getFirestore, doc, getDoc} from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+<script>
+  let UserCreds = JSON.parse(sessionStorage.getItem("user-creds"));
+  let UserInfo = JSON.parse(sessionStorage.getItem("user-info"));
+  let SignoutBtn = document.getElementById('signoutbutton');
+  
+  let MsgHead = document.getElementById('msg');
+  let GreetHead = document.getElementById('greet');
 
-  const firebaseConfig = {
-  apiKey: "AIzaSyAbJMzhsxCwiwXrTDq07s8Yo0tcKP1O798",
-  authDomain: "database1-e20d1.firebaseapp.com",
-  projectId: "database1-e20d1",
-  storageBucket: "database1-e20d1.appspot.com",
-  messagingSenderId: "872927475132",
-  appId: "1:872927475132:web:31be3c3af7c99bb01ea7b9"
-};
-
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const db = getFirestore();
-  const auth = getAuth(app);
-
-  let EmailInp = document.getElementById('emailInp');
-  let PassInp = document.getElementById('passwordInp'); 
-  let MainForm = document.getElementById('MainForm');
-
-  let SignInUser = evt => {
-    evt.preventDefault();
-
-    signInWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
-    .then(async(credentials)=>{
-      var ref = doc(db, "UserAuthList", credentials.user.uid);
-      const docSnap = await getDoc(ref);
-
-      if(docSnap.exists()){
-        sessionStorage.setItem("user-info", JSON.stringify({
-          firstname: docSnap.data().firstname,
-          lastname: docSnap.data().lastname,
-        }))
-        sessionStorage.setItem("user-creds", JSON.stringify(credentials.user));
-        window.location.href = "home.html";
-      }
-      })
-    .catch((error)=>{
-      alert(error.message);
-      console.log(error.code);
-      console.log(errormessage);
-    })
+  let Signout = ()=>{
+    sessionStorage.removeItem("user-creds");
+    sessionStorage.removeItem("user-info");
+    window.location.href = 'home.html'
   }
 
-  MainForm.addEventListener('submit', SignInUser);
+  let CheckCreds =  () => {
+    if (!sessionStorage.getItem("user-creds"))
+    window.location.href = 'home.html'
+
+    else{
+      MsgHead.innerText = `Selamat datang ${UserInfo.firstname + " " + UserInfo.lastname}`;
+    }
+  }
+
+  window.addEventListener('load', CheckCreds);
+  SignoutBtn.addEventListener('click', Signout);
 </script>
 </html>
