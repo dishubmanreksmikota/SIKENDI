@@ -14,8 +14,12 @@
         <nav class="navbar" style="background-color: #ffffff;">
           <div class="container-fluid">
             <a class="navbar-brand" href="../home.html"><img src="../logo_navbar_black.png" width="80"></a>
+            
             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border-radius: 100px;">
-              i
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+              </svg>
+              <i id="msg" class="bi bi-geo-alt-fill"></i>
             </button>
             
             <!-- Modal -->
@@ -198,6 +202,7 @@
   let UserCreds = JSON.parse(sessionStorage.getItem("user-creds"));
   let UserInfo = JSON.parse(sessionStorage.getItem("user-info"));
   let SignoutBtn = document.getElementById('signoutbutton');
+  let MsgHead = document.getElementById('msg');
   
   let Signout = ()=>{
     sessionStorage.removeItem("user-creds");
@@ -208,6 +213,9 @@
   let CheckCreds =  ()=>{
     if (!sessionStorage.getItem("user-creds"))
     window.location.href = "../home.html"
+    else{
+      MsgHead.innerText = `${UserInfo.firstname}`;
+    }
   }
 
   window.addEventListener('load', CheckCreds);
