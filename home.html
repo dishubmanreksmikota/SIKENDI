@@ -32,6 +32,8 @@
               <input type="password" class="form-control" id="passwordInp" placeholder="Password" id="passwordInp">
               <label for="floatingPassword">Password</label>
             </div>
+            <div id="liveAlertPlaceholder"></div>
+            <button type="button" class="btn btn-dark" id="liveAlertBtn" style="margin-top: 15px;">Daftar</button>
             <button type="submit" class="btn btn-dark" style="margin-top: 15px;">Login</button>
           </div>
         </div>
@@ -105,5 +107,25 @@
   }
 
   MainForm.addEventListener('submit', SignInUser);
+
+  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+const appendAlert = (message, type) => {
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<div class="alert alert-dark alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>'
+  ].join('')
+
+  alertPlaceholder.append(wrapper)
+}
+
+const alertTrigger = document.getElementById('liveAlertBtn')
+if (alertTrigger) {
+  alertTrigger.addEventListener('click', () => {
+    appendAlert('Tidak Punya Akun? Silahkan Hubungi Admin <a href="https:/wa.me/+62895396791644">Disini</a>', 'success')
+  })
+}
 </script>
 </html>
