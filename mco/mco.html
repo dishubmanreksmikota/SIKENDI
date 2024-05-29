@@ -109,31 +109,49 @@
         <h1>Form MCO</h1>
       </div>
        <div class="counter2">
+        <div class="row row-cols-2">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="floatingInput" name="RJ" required>
           <label for="floatingInput">Ruas Jalan</label>
         </div>
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" name="WP" required>
-          <label for="floatingInput">Waktu Perjalanan</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" name="WH">
-          <label for="floatingInput">Waktu Hambatan</label>
-        </div>
         <div class="form-floating">
-          <select class="form-select" id="floatingSelectGrid" name="KH">
-            <option selected disabled value="">Pilih Keterangan ...</option>
-            <option value="LL">Lampu Lalu Lintas</option>
-            <option value="KC">Kecelakaan Lalu Lintas</option>
-            <option value="KM">Ada Kendaraan Mogok/Berhenti Di Tengah Jalan</option>
-            <option value="BP">Bus Menaikan/Menurunkan Penumpang</option>
-            <option value="MC">Lalu Lintas Macet Tanpa Diketahui Penyebab Utamanya</option>
-            <option value="OM">Ada Penyeberangan/Orang Menyebrang</option>
-            <option value="PD">Ada Kendaraan Parkir Double/Sembarangan</option>
+          <select class="form-select" id="floatingSelectGrid" name="ARAH" required>
+            <option selected disabled value="">Pilih Arah ...</option>
+            <option value="Berangkat">Berangkat</option>
+            <option value="Kembali">Kembali</option>
           </select>
-          <label for="floatingSelectGrid">Keterangan Hambatan</label>
+          <label for="floatingSelectGrid">Arah</label>
         </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" name="WPM">
+          <label for="floatingInput">Waktu Perjalanan Menit</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" name="WPD" required>
+          <label for="floatingInput">Waktu Perjalanan Detik</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" name="WHM">
+          <label for="floatingInput">Waktu Hambatan Menit</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" name="WHD">
+          <label for="floatingInput">Waktu Hambatan Detik</label>
+        </div>
+      </div>
+      <div class="form-floating">
+        <select class="form-select" id="floatingSelectGrid" name="KH">
+          <option selected disabled value="">Pilih Keterangan ...</option>
+          <option value="LL">Lampu Lalu Lintas</option>
+          <option value="KC">Kecelakaan Lalu Lintas</option>
+          <option value="KM">Ada Kendaraan Mogok/Berhenti Di Tengah Jalan</option>
+          <option value="BP">Bus Menaikan/Menurunkan Penumpang</option>
+          <option value="MC">Lalu Lintas Macet Tanpa Diketahui Penyebab Utamanya</option>
+          <option value="OM">Ada Penyeberangan/Orang Menyebrang</option>
+          <option value="PD">Ada Kendaraan Parkir Double/Sembarangan</option>
+        </select>
+        <label for="floatingSelectGrid">Keterangan Hambatan</label>
+      </div>
       </div>
         <div class="container text-center">
           <div class="counter2">
