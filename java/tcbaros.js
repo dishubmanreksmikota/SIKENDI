@@ -10,6 +10,8 @@ let BUS_BESAR = document.querySelector("#qtyInputBUS_BESAR");
 let TRUK_BESAR = document.querySelector("#qtyInputTRUK_BESAR");
 let TRUK_TANGKI = document.querySelector("#qtyInputTRUK_TANGKI");
 let UM = document.querySelector("#qtyInputUM");
+let BUS_SDG = document.querySelector("#qtyInputBUS_SDG");
+let TRUK_GDG = document.querySelector("#qtyInputTRUK_GDG");
 const scriptURL = 'https://script.google.com/macros/s/AKfycbx3i05crdqWk0m9XdV2Nbfc4WEJLUSw64LjnzfxYV5sd_XnnclM4efCxH6XBhuIQ5b2/exec'
 const form = document.forms['contact-form']
 
@@ -122,6 +124,26 @@ function decrementBUS_KECIL(){
 }
 function incrementBUS_KECIL(){
     BUS_KECIL.value = parseInt(BUS_KECIL.value) + 1;
+}
+function decrementBUS_SDG(){
+    if (BUS_SDG.value <=0){
+        BUS_SDG.value = 0;
+    } else {
+        BUS_SDG.value = parseInt(BUS_SDG.value) - 1;
+    }
+}
+function incrementBUS_SDG(){
+    BUS_SDG.value = parseInt(BUS_SDG.value) + 1;
+}
+function decrementTRUK_GDG(){
+    if (TRUK_GDG.value <=0){
+        TRUK_GDG.value = 0;
+    } else {
+        TRUK_GDG.value = parseInt(TRUK_GDG.value) - 1;
+    }
+}
+function incrementTRUK_GDG(){
+    TRUK_GDG.value = parseInt(TRUK_GDG.value) + 1;
 }
 form.addEventListener('submit', e => {
     e.preventDefault()
