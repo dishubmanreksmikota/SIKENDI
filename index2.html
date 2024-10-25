@@ -95,23 +95,32 @@
   let LnameInp = document.getElementById('lnameInp');
   let MainForm = document.getElementById('MainForm');
 
-  let RegisterUser = evt => {
+  let RegisterUser  = evt => {
     evt.preventDefault();
 
     createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
-    .then(async (credentials)=>{
-      var ref = doc(db, "UserAuthList", credentials.user.uid);
-      await setDoc(ref, {
-        firstname: FnameInp.value,
-        lastname: LnameInp.value
-      });
+    .then(async (credentials) => {
+        var ref = doc(db, "UserAuthList", credentials.user.uid);
+        await setDoc(ref, {
+            firstname: FnameInp.value,
+            lastname: LnameInp.value
+        });
+        
+        // Clear the input fields after successful registration
+        EmailInp.value = '';
+        PassInp.value = '';
+        FnameInp.value = '';
+        LnameInp.value = '';
+        
+        // Optionally, you can show a success message or redirect the user
+        alert("Registration successful!");
     })
-    .catch((error)=>{
-      alert(error.message);
-      console.log(error.code);
-      console.log(errormessage);
-    })
-  }
+    .catch((error) => {
+        alert(error.message);
+        console.log(error.code);
+        console.log(error.message);
+    });
+}
 
   MainForm.addEventListener('submit', RegisterUser)
 </script>
