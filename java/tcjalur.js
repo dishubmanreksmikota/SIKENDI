@@ -10,7 +10,7 @@ let BUS_BESAR = document.querySelector("#qtyInputBUS_BESAR");
 let TRUK_BESAR = document.querySelector("#qtyInputTRUK_BESAR");
 let TRUK_TANGKI = document.querySelector("#qtyInputTRUK_TANGKI");
 let UM = document.querySelector("#qtyInputUM");
-const scriptURL = 'https://script.google.com/macros/s/AKfycby4-coTmuoTqk_H6N6plZu9zKTll06rMMI7fZ5p3__T0lQ9341sM8F_VS9HZtc2oVuE/exec'
+const scriptURL = 'https://script.google.com/macros/s/AKfycbysFUzVgUWaAPN4TGilyGAz0zrdzEjzrI9abNT77BPcA9mu_c1wW0mhdyzwLUOnN1N6/exec'
 const form = document.forms['contact-form']
 
 function decrementUM(){
